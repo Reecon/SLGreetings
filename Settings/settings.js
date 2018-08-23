@@ -1,0 +1,1 @@
+﻿var settings = {"EmoteUse": false, "Keyword": "hello hi hey hai", "KeywordUse": false, "Emote": "HeyGuys VoHiYo kaypikeHeyGuys", "permission": "everyone", "info": ""};

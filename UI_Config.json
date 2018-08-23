@@ -1,0 +1,60 @@
+﻿{
+    "Emote": {
+        "group": "Core", 
+        "label": "Emotes", 
+        "tooltip": "Space seperated list of emote codes (case sensitive)", 
+        "type": "textbox", 
+        "value": "HeyGuys VoHiYo kaypikeHeyGuys"
+    }, 
+    "EmoteUse": {
+        "group": "Core", 
+        "label": "Use Emote Filter", 
+        "tooltip": "If checked, messages without these emotes are not added to the queue", 
+        "type": "checkbox", 
+        "value": false
+    }, 
+    "Keyword": {
+        "group": "Core", 
+        "label": "Keywords", 
+        "tooltip": "Space seperated list of keywords (ignores case)", 
+        "type": "textbox", 
+        "value": "hello hi hey hai"
+    }, 
+    "KeywordUse": {
+        "group": "Core", 
+        "label": "Use Keyword Filter", 
+        "tooltip": "If checked, messages without these keywords are not added to the queue", 
+        "type": "checkbox", 
+        "value": false
+    }, 
+    "btnOpen": {
+        "function": "OpenQueueFile", 
+        "group": "Core", 
+        "label": "Open Queue", 
+        "tooltip": "Queue must be opened to recieve entries", 
+        "type": "button", 
+        "wsevent": "EVENT_NONE"
+    }, 
+    "info": {
+        "group": "Core", 
+        "label": "Info", 
+        "tooltip": "This field should only be filled when using the user_specific permission.", 
+        "type": "textbox", 
+        "value": ""
+    }, 
+    "output_file": "Settings/settings.json", 
+    "permission": {
+        "group": "Core", 
+        "items": [
+            "everyone", 
+            "moderator", 
+            "subscriber", 
+            "user_specific", 
+            "editor"
+        ], 
+        "label": "Permission", 
+        "tooltip": "Who is able to use the command", 
+        "type": "dropdown", 
+        "value": "everyone"
+    }
+}
