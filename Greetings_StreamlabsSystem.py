@@ -92,18 +92,18 @@ def Execute(data):
         keywordsPass = True
         emotesPass = True
 
-        # use channel filter?
+        # use keyword filter?
         if greetScriptSettings.KeywordUse:
-            # check for channel emotes
+            # check for keywords
             keywords = set(greetScriptSettings.Keyword.split(" "))
             tokens = set(data.Message.lower().split(" "))
             
             if keywords.isdisjoint(tokens):
                 keywordsPass = False
 
-        # use global filter?
+        # use emote filter?
         if greetScriptSettings.EmoteUse:
-            # check for global emotes
+            # check for emotes
             emotes = set(greetScriptSettings.Emote.split(" "))
             tokens = set(data.Message.split(" "))
             
@@ -111,10 +111,10 @@ def Execute(data):
                 emotesPass = False
         
         # send to html
-        if keywordsPass or emotesPass:
+        if (keywordsPass and emotesPass) or (greetScriptSettings.EmoteUse and emotesPass) or (greetScriptSettings.KeywordUse and keywordsPass):
             greetQueue.add(data.User.lower())
             jsonData = '{{ "user":"{0}", "message": "{1}"}}'.format(data.User, data.Message)
-            Parent.BroadcastWsEvent("EVENT_HELLO_MESSAGE", jsonData)
+            Parent.BroadcastWsEvent("EVENT_GREET_MESSAGE", jsonData)
 
 
     # remove messages from user who got timed out
@@ -122,10 +122,10 @@ def Execute(data):
         tokens = data.RawData.split(" ")
         
         # check for CLEARCHAT
-        #0 @ban-reason=;room-id=62983472;target-user-id=123456789;tmi-sent-ts=1534998648808
+        #0 @ban-reason=;room-id=987654321;target-user-id=123456789;tmi-sent-ts=1534998648808
         #1 :tmi.twitch.tv
         #2 CLEARCHAT
-        #3 #kaypikefashion
+        #3 #<channel>
         #4 :<username>
         try:
             if tokens[2] == "CLEARCHAT":
@@ -134,7 +134,7 @@ def Execute(data):
                 if user in greetQueue:
                     # yes? send clear
                     jsonData = '{{ "user":"{0}" }}'.format(user)
-                    Parent.BroadcastWsEvent("EVENT_HELLO_CLEARCHAT", jsonData)
+                    Parent.BroadcastWsEvent("EVENT_GREET_CLEARCHAT", jsonData)
                 else:
                     # no? add to queue
                     greetQueue.add(data.User.lower())
