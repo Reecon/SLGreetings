@@ -20,7 +20,7 @@ ScriptName = "Greetings"
 Website = "reecon820@gmail.com"
 Description = "Gives you a list of people greeting you"
 Creator = "Reecon820"
-Version = "0.0.1.0"
+Version = "0.0.2.0"
 
 #---------------------------
 #   Settings Handling
@@ -113,7 +113,7 @@ def Execute(data):
         # send to html
         if (keywordsPass and emotesPass) or (greetScriptSettings.EmoteUse and emotesPass) or (greetScriptSettings.KeywordUse and keywordsPass):
             greetQueue.add(data.User.lower())
-            jsonData = '{{ "user":"{0}", "message": "{1}"}}'.format(data.User, data.Message)
+            jsonData = '{{ "user":"{0}", "message": "{1}"}}'.format(data.User, data.Message.replace("'", '"').replace('"', '\\"'))
             Parent.BroadcastWsEvent("EVENT_GREET_MESSAGE", jsonData)
 
 
