@@ -113,7 +113,7 @@ def Execute(data):
         # send to html
         if (keywordsPass and emotesPass) or (greetScriptSettings.EmoteUse and emotesPass) or (greetScriptSettings.KeywordUse and keywordsPass):
             greetQueue.add(data.User.lower())
-            jsonData = '{{ "user":"{0}", "message": "{1}"}}'.format(data.User, data.Message.replace("'", '"').replace('"', '\\"'))
+            jsonData = '{{ "user":"{0}", "message": "{1}"}}'.format(data.User, data.Message.replace('"', '\\"'))
             Parent.BroadcastWsEvent("EVENT_GREET_MESSAGE", jsonData)
 
 
