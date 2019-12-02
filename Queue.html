@@ -7,7 +7,7 @@
 <head>
 </head>
 <body>
-  <div id="app">
+  <div id="app" @wheel="scrolled">
     <table class="table" style="width:100%;">
       <tr v-for="(m, i) in messages">
         <td style="text-align:left; width:30px;">{{ m.user }}</td>
@@ -27,10 +27,27 @@
       title: "Greetings",
       my_event: "",
       serviceUrl: "",
+      wasScrolled: false,
+      pauseOnScroll: true,
+      scrollTimeout: 60,
       socket: Object
     },
     updated: function() {
-      window.scrollTo(0,document.body.scrollHeight);
+      if (!vm.wasScrolled) {
+        window.scrollTo(0,document.body.scrollHeight);
+      }
+    },
+    methods: {
+      scrolled: function() {
+        if (vm.pauseOnScroll) {
+          if (!vm.wasScrolled) {
+            vm.wasScrolled = window.setTimeout(() => {vm.wasScrolled = false;}, vm.scrollTimeout * 1000);
+          } else {
+            window.clearTimeout(vm.wasScrolled);
+            vm.wasScrolled = false;
+            vm.wasScrolled = window.setTimeout(() => {vm.wasScrolled = false;}, vm.scrollTimeout * 1000);
+          }
+      }
     },
     mounted: function () {
       //---------------------------------
@@ -51,7 +68,7 @@
           author: 'Reecon820',
           website: 'reecon820@gmail.com',
           api_key: API_Key,
-          events: ['EVENT_GREET_MESSAGE', 'EVENT_GREET_CLEARCHAT']
+          events: ['EVENT_GREET_MESSAGE', 'EVENT_GREET_CLEARCHAT', 'EVENT_GREET_SETTINGS']
         };
 
         //  Send your Data to the server
@@ -71,6 +88,12 @@
       //---------------------------------
       this.socket.onmessage = function (message) {
         var json = JSON.parse(message.data);
+
+        if (json.event == 'EVENT_GREET_SETTINGS') {
+          var data = JSON.parse(json.data);
+          vm.pauseOnScroll = data.pauseOnScroll;
+          vm.scrollTimeout = data.scrollTimeout;
+        }
 
         if (json.event == 'EVENT_GREET_MESSAGE') {
           var data = JSON.parse(json.data);

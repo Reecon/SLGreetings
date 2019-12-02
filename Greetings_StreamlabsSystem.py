@@ -20,7 +20,7 @@ ScriptName = "Greetings"
 Website = "reecon820@gmail.com"
 Description = "Gives you a list of people greeting you"
 Creator = "Reecon820"
-Version = "0.0.2.0"
+Version = "0.0.3.0"
 
 #---------------------------
 #   Settings Handling
@@ -35,6 +35,8 @@ class GreetSettings:
             self.KeywordUse = False
             self.Emote = "HeyGuys VoHiYo"
             self.EmoteUse = False
+            self.PauseScroll = 20
+            self.PauseScrollUse = True
             self.permission = "everyone"
             self.info = ""
 
@@ -179,6 +181,10 @@ def ScriptToggled(state):
 
 def OpenQueueFile():
     os.startfile(greetQueueHtmlPath)
+    time.sleep(2)
+    pauseUse = 'true' if greetScriptSettings.PauseScrollUse else 'false'
+    jsonData = '{{ "pauseOnScroll":{0}, "scrollTimeout": {1}}}'.format(pauseUse, greetScriptSettings.PauseScroll)
+    Parent.BroadcastWsEvent("EVENT_GREET_SETTINGS", jsonData)
 
 
 def updateUi():
@@ -195,6 +201,8 @@ def updateUi():
     ui['KeywordUse']['value'] = greetScriptSettings.KeywordUse
     ui['Emote']['value'] = greetScriptSettings.Emote
     ui['EmoteUse']['value'] = greetScriptSettings.EmoteUse
+    ui['PauseScroll']['value'] = greetScriptSettings.PauseScroll
+    ui['PauseScrollUse']['value'] = greetScriptSettings.PauseScrollUse
     ui['info']['value'] = greetScriptSettings.info
     ui['permission']['value'] = greetScriptSettings.permission
 

@@ -4,7 +4,7 @@
         "label": "Emotes", 
         "tooltip": "Space seperated list of emote codes (case sensitive)", 
         "type": "textbox", 
-        "value": "HeyGuys VoHiYo kaypikeHeyGuys"
+        "value": "HeyGuys VoHiYo"
     }, 
     "EmoteUse": {
         "group": "Core", 
@@ -18,7 +18,7 @@
         "label": "Keywords", 
         "tooltip": "Space seperated list of keywords (ignores case)", 
         "type": "textbox", 
-        "value": "greetings hello hi hey hai"
+        "value": "hello"
     }, 
     "KeywordUse": {
         "group": "Core", 
@@ -26,6 +26,20 @@
         "tooltip": "If checked, messages without these keywords are not added to the queue", 
         "type": "checkbox", 
         "value": false
+    }, 
+    "PauseScroll": {
+        "group": "Core", 
+        "label": "Scroll pause time (sec)", 
+        "tooltip": "Time in seconds autoscrolling is paused when scrolling manually", 
+        "type": "numberbox", 
+        "value": 20
+    }, 
+    "PauseScrollUse": {
+        "group": "Core", 
+        "label": "Pause autoscroll when scrolled manually", 
+        "tooltip": "Pause autoscroll for configured time when you scroll manually in the queue.", 
+        "type": "checkbox", 
+        "value": true
     }, 
     "btnOpen": {
         "function": "OpenQueueFile", 

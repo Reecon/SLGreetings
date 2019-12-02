@@ -1,1 +1,1 @@
-﻿var settings = {"EmoteUse": false, "Keyword": "greetings hello hi hey hai", "KeywordUse": false, "Emote": "HeyGuys VoHiYo kaypikeHeyGuys", "permission": "everyone", "info": ""};
+﻿var settings = {"EmoteUse": false, "Keyword": "hello", "PauseScroll": 20, "Emote": "HeyGuys VoHiYo", "KeywordUse": false, "PauseScrollUse": true, "permission": "everyone", "info": ""};
