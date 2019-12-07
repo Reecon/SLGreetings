@@ -20,7 +20,7 @@ ScriptName = "Greetings"
 Website = "reecon820@gmail.com"
 Description = "Gives you a list of people greeting you"
 Creator = "Reecon820"
-Version = "0.0.3.0"
+Version = "0.0.3.1"
 
 #---------------------------
 #   Settings Handling
